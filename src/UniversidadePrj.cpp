@@ -6,17 +6,19 @@ using namespace graduacao;
 
 int main() {
 
-    Aluno a(100, "João");
-    float n[2] = {10.0, 8.5};
-    a.setNotas(n);
+    Aluno a("João");
 
-    cout << a.calculaMedia() << endl;
-    
-    Professor p;
+    Aluno a2("Maria");
 
-    p.alteraNotaAlunoGraduacao(a, 3.0, 4.0);
+    Aluno z("Pedro");
 
-    cout << a.calculaMedia() << endl;
+    cout << a.getCodigo() << endl;
+
+    cout << a2.getCodigo() << endl;
+
+    cout << z.getCodigo() << endl;
+
+//	graduacao::Aluno::imprimeSaudacao();
 
     return 0;
 }

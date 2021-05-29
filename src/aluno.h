@@ -20,9 +20,11 @@ namespace graduacao {
 
         float notas[2] = {0.0, 0.0};
 
+        static int proxCodigo;
+
     public:
         // Constructor
-        Aluno(int codigo, string nome);
+        Aluno(string nome);
         ~Aluno();
         
         // getters - access methods
@@ -31,14 +33,18 @@ namespace graduacao {
         float *getNotas();
 
         // setters - mutator methods
-        void setCodigo(int codigo);
         void setNome(string nome);
         void setNotas(float *notas);
         
         float calculaMedia();
 
-//        friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
-        friend class Professor;
+        //Função amiga declarada na classe Professor
+        friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
+//        friend class Professor;
+
+        static void imprimeSaudacao();
+
+        static int getProxyCodigo();
     };
 }
 

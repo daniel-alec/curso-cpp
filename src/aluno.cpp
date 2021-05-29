@@ -2,15 +2,18 @@
 #include "aluno.h"
 using namespace std;
 
+// inicializa atributo estático
+int graduacao::Aluno::proxCodigo = 1;
+
 // construtor
-graduacao::Aluno::Aluno(int codigo, string nome) {
-    this->setCodigo(codigo);
+graduacao::Aluno::Aluno(string nome) {
+    this->codigo = getProxyCodigo();
     this->setNome(nome);
     cout << "objeto alocado" << endl;
 }
 
 graduacao::Aluno::~Aluno() {
-    cout << "objeto destruído" << endl;
+	cout << "objeto destruído" << endl;
 }
 
 // getters - accessor methods
@@ -18,13 +21,6 @@ int graduacao::Aluno::getCodigo() {
     return codigo;
 }
 
-// setters - mutator methods
-void graduacao::Aluno::setCodigo(int codigo) {
-    if (codigo <= 0) {
-        codigo = (-1) * codigo;
-    }
-    this->codigo = codigo;
-}
 
 string graduacao::Aluno::getNome() {
     return nome;
@@ -52,4 +48,12 @@ float graduacao::Aluno::calculaMedia() {
     media = media + *p;
 
     return media / 2;
+}
+
+void graduacao::Aluno::imprimeSaudacao() {
+	cout << "Olá Mundo!!!" << endl;
+}
+
+int graduacao::Aluno::getProxyCodigo() {
+	return proxCodigo++;
 }
