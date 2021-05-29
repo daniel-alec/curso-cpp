@@ -2,7 +2,13 @@
 #define ALUNO_H_
 
 #include <string>
+#include "professor.h"
 using namespace std;
+
+namespace posgraduacao {
+	class Aluno {
+	};
+}
 
 namespace graduacao {
     
@@ -15,11 +21,11 @@ namespace graduacao {
         float notas[2] = {0.0, 0.0};
 
     public:
-        // construtor
+        // Constructor
         Aluno(int codigo, string nome);
         ~Aluno();
         
-        // getters - accessor methods
+        // getters - access methods
         int getCodigo();
         string getNome();
         float *getNotas();
@@ -30,6 +36,9 @@ namespace graduacao {
         void setNotas(float *notas);
         
         float calculaMedia();
+
+//        friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
+        friend class Professor;
     };
 }
 

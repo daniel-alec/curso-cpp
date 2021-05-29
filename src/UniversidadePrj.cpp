@@ -12,5 +12,11 @@ int main() {
 
     cout << a.calculaMedia() << endl;
     
+    Professor p;
+
+    p.alteraNotaAlunoGraduacao(a, 3.0, 4.0);
+
+    cout << a.calculaMedia() << endl;
+
     return 0;
 }
