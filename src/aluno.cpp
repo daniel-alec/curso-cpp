@@ -57,3 +57,26 @@ void graduacao::Aluno::imprimeSaudacao() {
 int graduacao::Aluno::getProxyCodigo() {
 	return proxCodigo++;
 }
+
+// Contrutor
+graduacao::AlunoPesquisador::AlunoPesquisador(string nome) : Aluno(nome) {
+
+}
+
+// Destrutor
+graduacao::AlunoPesquisador::~AlunoPesquisador() {
+
+}
+
+// Setters
+void graduacao::AlunoPesquisador::setBolsa(double bolsa) {
+	this->bolsa = bolsa;
+}
+
+void graduacao::AlunoPesquisador::setLinha(string linha) {
+	this->linha = linha;
+}
+
+void graduacao::AlunoPesquisador::setOrientador(string orientador) {
+	this->orientador = orientador;
+}

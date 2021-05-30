@@ -12,11 +12,17 @@ int main() {
 
     Aluno z("Pedro");
 
+    AlunoPesquisador x("José");
+
     cout << a.getCodigo() << endl;
 
     cout << a2.getCodigo() << endl;
 
     cout << z.getCodigo() << endl;
+
+    cout << x.getCodigo() << endl;
+    cout << x.getNome() << endl;
+
 
 //	graduacao::Aluno::imprimeSaudacao();
 

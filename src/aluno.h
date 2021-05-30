@@ -11,8 +11,8 @@ namespace posgraduacao {
 }
 
 namespace graduacao {
-    
-    class Aluno {
+
+class Aluno {
 
     private:
         int codigo;
@@ -21,6 +21,9 @@ namespace graduacao {
         float notas[2] = {0.0, 0.0};
 
         static int proxCodigo;
+
+    protected:
+        double valorMensalidade;
 
     public:
         // Constructor
@@ -46,6 +49,30 @@ namespace graduacao {
 
         static int getProxyCodigo();
     };
+
+	class AlunoPesquisador : public Aluno {
+
+	private:
+		string orientador;
+		string linha;
+		double bolsa;
+
+	public:
+		AlunoPesquisador(string nome);
+		~AlunoPesquisador();
+
+		double getBolsa();
+		string getLinha();
+		string getOrientador();
+
+		void setBolsa(double bolsa);
+		void setLinha(string linha);
+		void setOrientador(string orientador);
+
+		double calculaValorMensalidade() {
+			return (valorMensalidade - (valorMensalidade * bolsa/100));
+		}
+	};
 }
 
 #endif /* ALUNO_H_ */
