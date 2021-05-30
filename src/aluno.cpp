@@ -50,13 +50,14 @@ float graduacao::Aluno::calculaMedia() {
     return media / 2;
 }
 
-void graduacao::Aluno::imprimeSaudacao() {
-	cout << "Olá Mundo!!!" << endl;
-}
-
 int graduacao::Aluno::getProxyCodigo() {
 	return proxCodigo++;
 }
+
+// virtual .. = 0 -> não tem implementação
+//void graduacao::Aluno::imprimeSaudacao() {
+//	cout << "Olá eu sou o aluno " << getNome() << endl;
+//}
 
 // Contrutor
 graduacao::AlunoPesquisador::AlunoPesquisador(string nome) : Aluno(nome) {
@@ -79,4 +80,8 @@ void graduacao::AlunoPesquisador::setLinha(string linha) {
 
 void graduacao::AlunoPesquisador::setOrientador(string orientador) {
 	this->orientador = orientador;
+}
+
+void graduacao::AlunoPesquisador::imprimeSaudacao() {
+	cout << "Olá eu sou o aluno pesquisador " << getNome() << endl;
 }

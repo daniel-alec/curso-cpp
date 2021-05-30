@@ -6,25 +6,17 @@ using namespace graduacao;
 
 int main() {
 
-    Aluno a("João");
+//	Aluno *maria = new Aluno("Maria");
 
-    Aluno a2("Maria");
+	Aluno *joao = new AlunoPesquisador("João");
 
-    Aluno z("Pedro");
+//	maria->imprimeSaudacao();
 
-    AlunoPesquisador x("José");
+	// early binding - ligação antecipada
+//	joao->imprimeSaudacao();
 
-    cout << a.getCodigo() << endl;
-
-    cout << a2.getCodigo() << endl;
-
-    cout << z.getCodigo() << endl;
-
-    cout << x.getCodigo() << endl;
-    cout << x.getNome() << endl;
-
-
-//	graduacao::Aluno::imprimeSaudacao();
+	// late binding
+	joao->imprimeSaudacao();
 
     return 0;
 }

@@ -45,9 +45,13 @@ class Aluno {
         friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
 //        friend class Professor;
 
-        static void imprimeSaudacao();
+        virtual void imprimeSaudacao() = 0; // amarração tardia - puro ( = 0)
 
         static int getProxyCodigo();
+
+        double calculaValorMensalidade() {
+        	return valorMensalidade;
+        }
     };
 
 	class AlunoPesquisador : public Aluno {
@@ -69,8 +73,17 @@ class Aluno {
 		void setLinha(string linha);
 		void setOrientador(string orientador);
 
+		// sobreposição de métodos
+		void imprimeSaudacao();
+
+		// sobreposição de métodos - override
 		double calculaValorMensalidade() {
 			return (valorMensalidade - (valorMensalidade * bolsa/100));
+		}
+
+		// sobrecarga de método - overload
+		double calculaValorMensalidade(double bonus) {
+			return (valorMensalidade - (valorMensalidade * bolsa/100)) - bonus;
 		}
 	};
 }
