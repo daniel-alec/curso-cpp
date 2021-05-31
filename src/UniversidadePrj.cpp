@@ -1,22 +1,29 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "aluno.h"
 using namespace std;
 using namespace graduacao;
 
 int main() {
 
-//	Aluno *maria = new Aluno("Maria");
+	vector<Aluno> meuVetor; //Cria um vetor de alunos
 
-	Aluno *joao = new AlunoPesquisador("João");
+	Aluno a("João");
+	Aluno b("Maria");
+	Aluno c("José");
 
-//	maria->imprimeSaudacao();
+	meuVetor.push_back(a);
+	meuVetor.push_back(b);
+	meuVetor.push_back(c);
 
-	// early binding - ligação antecipada
-//	joao->imprimeSaudacao();
+	for(int i = 0; i < meuVetor.size(); i++) {
+		cout << meuVetor[i].getNome() << endl;
+	}
 
-	// late binding
-	joao->imprimeSaudacao();
+	meuVetor.pop_back();
+	meuVetor.pop_back();
+	meuVetor.pop_back();
 
-    return 0;
+	return 0;
 }

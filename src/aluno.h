@@ -26,8 +26,11 @@ class Aluno {
         double valorMensalidade;
 
     public:
-        // Constructor
+        //Constructor
         Aluno(string nome);
+        //Construtor de cópida
+        Aluno(const Aluno &a);
+        //Destrutor de classe
         ~Aluno();
         
         // getters - access methods
@@ -36,22 +39,27 @@ class Aluno {
         float *getNotas();
 
         // setters - mutator methods
+        void setCodigo(int codigo);
         void setNome(string nome);
-        void setNotas(float *notas);
-        
+        void setValorMensalidade(double valorMensalidade);
+        void setNotas(float *notas); // ou notas[]
         float calculaMedia();
 
         //Função amiga declarada na classe Professor
         friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
 //        friend class Professor;
 
-        virtual void imprimeSaudacao() = 0; // amarração tardia - puro ( = 0)
+        // Função estática
+        static int getProxCodigo();
 
-        static int getProxyCodigo();
+        double calculaValorMensalidade();
 
-        double calculaValorMensalidade() {
-        	return valorMensalidade;
-        }
+        // Função Virtual
+        // amarração tardia - puro ( = 0)  -> !!!torna a Classe Abstrata!!!
+//        virtual void imprimeSaudacao() = 0;
+
+        // Função Virtual
+        virtual void imprimeSaudacao();
     };
 
 	class AlunoPesquisador : public Aluno {
@@ -77,14 +85,11 @@ class Aluno {
 		void imprimeSaudacao();
 
 		// sobreposição de métodos - override
-		double calculaValorMensalidade() {
-			return (valorMensalidade - (valorMensalidade * bolsa/100));
-		}
+		double calculaValorMensalidade();
 
 		// sobrecarga de método - overload
-		double calculaValorMensalidade(double bonus) {
-			return (valorMensalidade - (valorMensalidade * bolsa/100)) - bonus;
-		}
+		double calculaValorMensalidade(double bonus);
+
 	};
 }
 
