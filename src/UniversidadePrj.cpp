@@ -2,9 +2,17 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <algorithm>
 #include "aluno.h"
 using namespace std;
 using namespace graduacao;
+
+bool compara_codigo(Aluno x, Aluno y) {
+	if (x.getCodigo() > y.getCodigo()) {
+		return true;
+	}
+	else false;
+}
 
 int main() {
 
@@ -20,7 +28,12 @@ int main() {
 	meuVetor.push_back(c);
 
 	for(i = meuVetor.begin(); i != meuVetor.end(); i++) {
-		cout << (*i).getNome() << endl;
+		cout << (*i).getCodigo() << endl;
+	}
+
+	sort(meuVetor.begin(), meuVetor.end(), compara_codigo);
+	for(i = meuVetor.begin(); i != meuVetor.end(); i++) {
+		cout << (*i).getCodigo() << endl;
 	}
 
 	meuVetor.pop_back();
