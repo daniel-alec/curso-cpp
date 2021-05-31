@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iterator>
 #include "aluno.h"
 using namespace std;
 using namespace graduacao;
@@ -8,6 +9,7 @@ using namespace graduacao;
 int main() {
 
 	vector<Aluno> meuVetor; //Cria um vetor de alunos
+	vector<Aluno>::iterator i; // Cria um iterador de alunos
 
 	Aluno a("João");
 	Aluno b("Maria");
@@ -17,8 +19,8 @@ int main() {
 	meuVetor.push_back(b);
 	meuVetor.push_back(c);
 
-	for(int i = 0; i < meuVetor.size(); i++) {
-		cout << meuVetor[i].getNome() << endl;
+	for(i = meuVetor.begin(); i != meuVetor.end(); i++) {
+		cout << (*i).getNome() << endl;
 	}
 
 	meuVetor.pop_back();
