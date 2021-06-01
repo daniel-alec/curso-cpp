@@ -16,11 +16,21 @@ bool compara_codigo(Aluno x, Aluno y) {
 
 int main() {
 
-	string nome;
-	cout << "Digite o seu nome: " << endl;
-//	cin >> nome; // não pega nome composto
-	getline(cin, nome);
-	cout << "Bem-vindo " << nome << endl;
+	Aluno a("João");
+	Professor p;
+
+	try {
+		p.alteraNotaAlunoGraduacao(a, -50, 1);
+	}
+	catch(const char* msg) {
+		cout << msg << endl;
+	}
+
+//	string nome;
+//	cout << "Digite o seu nome: " << endl;
+////	cin >> nome; // não pega nome composto
+//	getline(cin, nome);
+//	cout << "Bem-vindo " << nome << endl;
 
 	/*
 	vector<Aluno> meuVetor; //Cria um vetor de alunos
