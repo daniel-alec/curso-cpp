@@ -1,66 +1,102 @@
 #ifndef ALUNO_H_
 #define ALUNO_H_
 
+#include <iostream>
 #include <string>
 #include "professor.h"
 using namespace std;
 
 namespace posgraduacao {
+
 	class Aluno {
+	private:
+		int codigo;
+		string nome;
+
+		float notas[2] = {0.0, 0.0};
+
+		static int proxCodigo;
+
+	protected:
+		double valorMensalidade;
+
+	public:
+		//Construtor parametrizado
+		Aluno(string nome);
+		//Destrutor da classe
+		~Aluno();
+
+		//GETTERS - accessor methods
+		int getCodigo();
+		string getNome();
+		float *getNotas();
+
+		//SETTERS - mutator methods
+		void setCodigo(int codigo);
+		void setNome(string nome);
+		void setValorMensalidade(double valorMensalidade);
+		void setNotas(float notas[]);
+		float calculaMedia();
+
+		//Função amiga declarada na classe Professor
+		friend void Professor::alteraNotaAlunoPosGraduacao(Aluno &a, float n1, float n2);
+
+		//Função estática
+		static int getProxCodigo();
+
+		double calculaValorMensalidade();
+
+		//Função virtual
+		virtual void imprimeSaudacao();
 	};
 }
 
+/***********************************************/
+
 namespace graduacao {
 
-class Aluno {
+	class Aluno {
 
-    private:
-        int codigo;
-        string nome;
+	private:
+		int codigo;
+		string nome;
 
-        float notas[2] = {0.0, 0.0};
+		float notas[2] = {0.0, 0.0};
 
-        static int proxCodigo;
+		static int proxCodigo;
 
-    protected:
-        double valorMensalidade;
+	protected:
+		double valorMensalidade;
 
-    public:
-        //Constructor
-        Aluno(string nome);
-        //Construtor de cópida
-        Aluno(const Aluno &a);
-        //Destrutor de classe
-        ~Aluno();
-        
-        // getters - access methods
-        int getCodigo();
-        string getNome();
-        float *getNotas();
+	public:
+		//Construtor parametrizado
+		Aluno(string nome);
+		//Destrutor da classe
+		~Aluno();
 
-        // setters - mutator methods
-        void setCodigo(int codigo);
-        void setNome(string nome);
-        void setValorMensalidade(double valorMensalidade);
-        void setNotas(float *notas); // ou notas[]
-        float calculaMedia();
+		//GETTERS - accessor methods
+		int getCodigo();
+		string getNome();
+		float *getNotas();
 
-        //Função amiga declarada na classe Professor
-        friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
-//        friend class Professor;
+		//SETTERS - mutator methods
+		void setCodigo(int codigo);
+		void setNome(string nome);
+		void setValorMensalidade(double valorMensalidade);
+		void setNotas(float notas[]);
+		float calculaMedia();
 
-        // Função estática
-        static int getProxCodigo();
+		//Função amiga declarada na classe Professor
+		friend void Professor::alteraNotaAlunoGraduacao(Aluno &a, float n1, float n2);
 
-        double calculaValorMensalidade();
+		//Função estática
+		static int getProxCodigo();
 
-        // Função Virtual
-        // amarração tardia - puro ( = 0)  -> !!!torna a Classe Abstrata!!!
-//        virtual void imprimeSaudacao() = 0;
+		double calculaValorMensalidade();
 
-        // Função Virtual
-        virtual void imprimeSaudacao();
-    };
+		//Função virtual
+		virtual void imprimeSaudacao();
+	};
 
 	class AlunoPesquisador : public Aluno {
 
@@ -70,27 +106,31 @@ class Aluno {
 		double bolsa;
 
 	public:
+		//Construtor
 		AlunoPesquisador(string nome);
+		//Destrutor
 		~AlunoPesquisador();
 
+		//Getters
 		double getBolsa();
 		string getLinha();
 		string getOrientador();
 
+		//Setters
 		void setBolsa(double bolsa);
 		void setLinha(string linha);
 		void setOrientador(string orientador);
 
-		// sobreposição de métodos
+		//SOBREPOSIÇÃO DE MÉTODOS
 		void imprimeSaudacao();
 
-		// sobreposição de métodos - override
+		//SOBREPOSIÇÃO DE MÉTODOS
 		double calculaValorMensalidade();
 
-		// sobrecarga de método - overload
+		//SOBRECARGA DE MÉTODO
 		double calculaValorMensalidade(double bonus);
-
 	};
+
 }
 
 #endif /* ALUNO_H_ */

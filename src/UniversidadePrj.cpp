@@ -1,62 +1,113 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <iterator>
-#include <algorithm>
+#include <thread>
+
 #include "aluno.h"
-using namespace std;
+#include "professor.h"
 using namespace graduacao;
 
-bool compara_codigo(Aluno x, Aluno y) {
-	if (x.getCodigo() > y.getCodigo()) {
-		return true;
+class Universidade {
+
+private:
+	vector<graduacao::Aluno> alunosGraduacao;
+	vector<posgraduacao::Aluno> alunosPosGraduacao;
+
+public:
+	void calculaMediaGeralGraduacao() {
+		float soma = 0.0F;
+
+		int qtde = 0;
+		for(unsigned int i = 0; i < alunosGraduacao.size(); i++) {
+			soma += alunosGraduacao[i].calculaMedia();
+			qtde++;
+		}
+
+		if(qtde > 0){
+			cout << "Média geral dos alunos da graduação: " << soma/qtde << endl;
+		}
+		else{
+			cout << "Média geral dos alunos da graduação: 0.0" << endl;
+		}
 	}
-	else false;
-}
+
+	void calculaMediaGeralPosGraduacao() {
+		float soma = 0.0F;
+
+		int qtde = 0;
+		for(unsigned int i = 0; i < alunosPosGraduacao.size(); i++) {
+			soma += alunosPosGraduacao[i].calculaMedia();
+			qtde++;
+		}
+
+		if(qtde > 0){
+			cout << "Média geral dos alunos da pós-graduação: " << soma/qtde << endl;
+		}
+		else{
+			cout << "Média geral dos alunos da pós-graduação: 0.0" << endl;
+		}
+	}
+
+	void adicionaAlunoGraduacao(graduacao::Aluno a) {
+		alunosGraduacao.push_back(a);
+	}
+
+	void adicionaAlunoPosGraduacao(posgraduacao::Aluno a) {
+		alunosPosGraduacao.push_back(a);
+	}
+};
+
 
 int main() {
+	//Objeto universidade
+	Universidade u;
 
-	Aluno a("João");
-	Professor p;
+	/********************************************************************/
 
-	try {
-		p.alteraNotaAlunoGraduacao(a, -50, 1);
-	}
-	catch(const char* msg) {
-		cout << msg << endl;
-	}
-
-//	string nome;
-//	cout << "Digite o seu nome: " << endl;
-////	cin >> nome; // não pega nome composto
-//	getline(cin, nome);
-//	cout << "Bem-vindo " << nome << endl;
-
+	//Aluno da graduação João
+	graduacao::Aluno joao("João");
 	/*
-	vector<Aluno> meuVetor; //Cria um vetor de alunos
-	vector<Aluno>::iterator i; // Cria um iterador de alunos
-
-	Aluno a("João");
-	Aluno b("Maria");
-	Aluno c("José");
-
-	meuVetor.push_back(a);
-	meuVetor.push_back(b);
-	meuVetor.push_back(c);
-
-	for(i = meuVetor.begin(); i != meuVetor.end(); i++) {
-		cout << (*i).getCodigo() << endl;
-	}
-
-	sort(meuVetor.begin(), meuVetor.end(), compara_codigo);
-	for(i = meuVetor.begin(); i != meuVetor.end(); i++) {
-		cout << (*i).getCodigo() << endl;
-	}
-
-	meuVetor.pop_back();
-	meuVetor.pop_back();
-	meuVetor.pop_back();
+	float notas[2] = {10.0F, 8.5F}; //alocação estática (STACK)
+	float *notas = new float[2]{10.0F, 8.5F}; //alocação dinâmica (HEAP)
 	*/
 
-	return 0;
+	joao.setNotas(new float[2]{10.0F, 8.5F});
+	u.adicionaAlunoGraduacao(joao); //Adiciona aluno à universidade
+
+	//Aluno da graduação Maria
+	graduacao::Aluno maria("Maria");
+	maria.setNotas(new float[2]{7.0F, 8.5F});
+	u.adicionaAlunoGraduacao(maria); //Adiciona aluno à universidade
+
+	//Aluno da graduação Pedro
+	graduacao::Aluno pedro("Pedro");
+	pedro.setNotas(new float[2]{6.0F, 0.5F});
+	u.adicionaAlunoGraduacao(pedro); //Adiciona aluno à universidade
+
+	/********************************************************************/
+
+	//Aluno da pós-graduação João
+	posgraduacao::Aluno carlos("Carlos");
+	carlos.setNotas(new float[2]{8.0F, 8.5F});
+	u.adicionaAlunoPosGraduacao(carlos); //Adiciona aluno à universidade
+
+	//Aluno da pós-graduação Renata
+	posgraduacao::Aluno renata("Renata");
+	renata.setNotas(new float[2]{7.0F, 8.5F});
+	u.adicionaAlunoPosGraduacao(renata); //Adiciona aluno à universidade
+
+	//Aluno da pós-graduação Pedro
+	posgraduacao::Aluno jose("José");
+	jose.setNotas(new float[2]{6.0F, 7.5F});
+	u.adicionaAlunoPosGraduacao(jose); //Adiciona aluno à universidade
+
+	/* Parâmetros:
+	a referência para a função membro da classe
+	e o endereço de memória do objeto o qual chama esta função */
+	thread tGrad(&Universidade::calculaMediaGeralGraduacao, &u);
+
+	thread tPos(&Universidade::calculaMediaGeralPosGraduacao, &u);
+
+	tGrad.join();
+	tPos.join();
 }
