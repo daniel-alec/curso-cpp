@@ -16,6 +16,13 @@ bool compara_codigo(Aluno x, Aluno y) {
 
 int main() {
 
+	string nome;
+	cout << "Digite o seu nome: " << endl;
+//	cin >> nome; // não pega nome composto
+	getline(cin, nome);
+	cout << "Bem-vindo " << nome << endl;
+
+	/*
 	vector<Aluno> meuVetor; //Cria um vetor de alunos
 	vector<Aluno>::iterator i; // Cria um iterador de alunos
 
@@ -39,6 +46,7 @@ int main() {
 	meuVetor.pop_back();
 	meuVetor.pop_back();
 	meuVetor.pop_back();
+	*/
 
 	return 0;
 }
